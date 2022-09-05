@@ -1,1 +1,18 @@
-# projeto_es
+# Escopo do Sistema
+Sistema para Troca de Figurinhas da Copa do Mundo
+
+# Principais Features
+ - Login
+ - Cadastrar figurinhas repetidas e desejadas
+ - Trocar mensagem com outros usuários
+ 
+# Tecnologias
+NodeJs
+ReactJs
+SQLite
+Html+CSS
+
+# Membros da Equipe
+Lourenço Montenegro
+Thiago Pádua
+Turi Andrade
