@@ -5,6 +5,7 @@
  ### - Login
  ### - Cadastrar figurinhas repetidas e desejadas
  ### - Trocar mensagem com outros usuários
+ ### - Ver quais figurinhas que você deseja outro usuário tem repetidas
  
 # Tecnologias
 ### NodeJs
