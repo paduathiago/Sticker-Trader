@@ -25,9 +25,14 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 
 ### - História 1:
 . Como usuário, quero cadastrar uma figurinha recém adquirida 
+  - 
+  -
 
 ### - História 2:
 . Como usuário, gostaria de visualizar figurinhas repetidas de outros usuários
+  - Conferir na base todas as figurinhas repetidas e quantidades [Pedro]
+  - Implementar busca de figurinha especifica na base dados [Pedro]
+  - Verificar figurinhas de outros usuários de acordo com a busca [Pedro]
 
 ### - História 3:
 . Como usuário, gostaria de remover uma figurinha da minha lista de repetidas
