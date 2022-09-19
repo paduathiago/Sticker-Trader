@@ -49,7 +49,7 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 ### História:
 . Como usuário, gostaria de manter um chat com outros usuários
   - Implementar botão de abrir chat na visita ao perfil de outros usuários
-  - Implementar o chat com outros usuários
+  - Implementar interface de chat com outros usuários
   - Direcionar ao chat com outros usuários durante a busca de figurinhas
 
 ### História:
