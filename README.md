@@ -41,6 +41,8 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 # Backlog do produto
 ### História:
 . Como usuário, eu gostaria de me cadastrar
+  - Implementar interface web de cadastro e preenchimento de dados
+  - Atualizar a base de dados de acordo com os dados do cadastro [Pedro]
 
 ### História:
 . Como administrador, gostaria de banir um usuário
