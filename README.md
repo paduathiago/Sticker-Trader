@@ -49,3 +49,6 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 
 ### História:
 . Como administrador, gostaria de anunciar um evento de troca de figurinhas
+
+### História
+. Como usuário, gostaria de me comunicar com outros usuários para combinar trocas 
