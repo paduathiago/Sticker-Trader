@@ -32,7 +32,7 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 . Como usuário, gostaria de visualizar figurinhas repetidas de outros usuários
   - Implementar interface web de busca e apresentação da base de dados de figurinhas
   - Conferir na base todas as figurinhas repetidas e quantidades [Pedro]
-  - Implementar busca de figurinha especifica na base dados [Pedro]
+  - Realizar a verificação de elementos em base de dados [Pedro]
   - Verificar figurinhas de outros usuários de acordo com a busca na base de dados [Pedro]
 
 ### - História 3:
