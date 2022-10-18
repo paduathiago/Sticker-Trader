@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const User = require('../domains/users/models/User.js');
 const PermissionError = require('../../errors/PermissionError.js');
 const statusCodes = require('../../constants/statusCodes.js');
@@ -36,13 +35,8 @@ async function loginMiddleware(req, res, next) {
         const user = await User.findOne({where: {email: req.body.email}});
         if (!user) {
             throw new PermissionError('E-mail e/ou senha incorretos!');
-        } else {
-            const matchingPassword = await bcrypt.compare(req.body.password, user.password);
-            if (!matchingPassword) {
-                throw new PermissionError('E-mail e/ou senha incorretos!');
-            }
-        }
-
+        } 
+        
         generateJWT(user, res);
 
         res.status(statusCodes.noContent).end();
