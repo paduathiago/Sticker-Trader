@@ -4,10 +4,10 @@
  * esteja autorizada para tal ação.
  */
 class NotAuthorizedError extends Error {
-    constructor(msg) {
-        super(msg);
-        this.name = 'NotAuthorizedError';
-    }
+  constructor(msg) {
+    super(msg);
+    this.name = 'NotAuthorizedError';
+  }
 }
-  
+
 module.exports = NotAuthorizedError;

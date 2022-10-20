@@ -3,10 +3,10 @@
  * partidos de um JWT.
  */
 class TokenError extends Error {
-    constructor(msg) {
-        super(msg);
-        this.name = 'TokenError';
-    }
+  constructor(msg) {
+    super(msg);
+    this.name = 'TokenError';
+  }
 }
-  
+
 module.exports = TokenError;

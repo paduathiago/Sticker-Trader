@@ -7,28 +7,28 @@ const QueryError = require('../../errors/QueryError');
 const statusCodes = require('../../constants/statusCodes.js');
 
 function errorHandler(error, req, res, next) {
-    let message = error.message;
-    let status = statusCodes.internalServerError;
+  let message = error.message;
+  let status = statusCodes.internalServerError;
 
-    if (error instanceof JsonWebTokenError ||
+  if (error instanceof JsonWebTokenError ||
     error instanceof NotAuthorizedError) {
-        status = statusCodes.forbidden;
-    }
+    status = statusCodes.forbidden;
+  }
 
-    if (error instanceof InvalidParamError) {
-        status = statusCodes.badRequest;
-    }
+  if (error instanceof InvalidParamError) {
+    status = statusCodes.badRequest;
+  }
 
-    if (error instanceof TokenError) {
-        status = statusCodes.notFound;
-    }
+  if (error instanceof TokenError) {
+    status = statusCodes.notFound;
+  }
 
-    if (error instanceof QueryError) {
-        status = statusCodes.badRequest;
-    }
+  if (error instanceof QueryError) {
+    status = statusCodes.badRequest;
+  }
 
-    console.log(error);
-    res.status(status).json(message);
+  console.log(error);
+  res.status(status).json(message);
 }
 
 module.exports = errorHandler;

@@ -1,15 +1,5 @@
-require('dotenv').config();
+const { Sequelize } = require('sequelize');
 
-const {Sequelize} = require('sequelize');
-
-const sequelize = new Sequelize(
-    process.env.DB,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        host: process.env.DB_HOST,
-        dialect: 'sqlite',
-    },
-);
+const sequelize = new Sequelize('albumcopa', 'root', 'Dec427429!', {dialect: 'mysql', host: 'localhost'});
 
 module.exports = sequelize;
