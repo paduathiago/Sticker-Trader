@@ -1,40 +1,45 @@
-const Sticker = require('../models/Sticker.js');
-const QueryError = require('../../../../errors/QueryError.js');
+const StickerModel = require("../models/Sticker");
+const StickerEntity = require("../entities/StickerEntity");
+const QueryError = require("../../../../errors/QueryError");
+const InvalidParamError = require("../../../../errors/InvalidParamError");
 
 class StickerService {
   async create(body) {
-    const newSticker = {
-      numero: body.numero,
-      nome: body.nome,
-      selecao: body.selecao,
-    };
+    const newSticker = new StickerEntity({
+      number: body.number,
+      name: body.name,
+      team: body.team,
+    });
 
-    await Sticker.create(newSticker);
+    await StickerModel.create(newSticker.toObject());
   }
 
-  async createAll() {
-    let x = 200
-    while (x>0){
-      let newSticker = {
-        number: x
-      }
-      await Sticker.create(newSticker);
-      x = x-1;
+  async createAll(n) {
+    if (n < 1) {
+      throw new InvalidParamError("Número de figurinhas deve ser no mínimo 1.");
+    }
+
+    for (i = 1; i <= n; i++) {
+      const newSticker = new StickerEntity({
+        number: i,
+      });
+
+      await StickerModel.create(newSticker.toObject());
     }
   }
 
   async getAll() {
-    const stickers = await Sticker.findAll();
+    const stickers = await StickerModel.findAll();
 
     if (!stickers) {
-      throw new QueryError('Não há nenhuma figurinha cadastrada');
+      throw new QueryError("Não há nenhuma figurinha cadastrada!");
     }
 
     return stickers;
   }
 
   async getById(id) {
-    const sticker = await Sticker.findByPk(id);
+    const sticker = await StickerModel.findByPk(id);
 
     if (!sticker) {
       throw new QueryError(`Não há uma figurinha com o ID ${id}!`);
@@ -42,13 +47,9 @@ class StickerService {
 
     return sticker;
   }
-  
-  async getByNumber(numero) {
-    const sticker = await Sticker.findOne({where: {number: numero}});
 
-    if (!sticker) {
-      throw new QueryError(`Não há uma figurinha com o número ${numero}!`);
-    }
+  async getByNumber(number) {
+    const sticker = await StickerModel.findOne({ where: { number } });
 
     return sticker;
   }
@@ -64,4 +65,4 @@ class StickerService {
   }
 }
 
-module.exports = new StickerService;
+module.exports = new StickerService();

@@ -1,44 +1,39 @@
-const database = require('../../../../database/index.js')
-const {DataTypes} = require('sequelize');
+const database = require("../../../../database/index.js");
+const { DataTypes } = require("sequelize");
 
-const Sticker = require('../../stickers/models/Sticker.js');
-const User = require('../../users/models/User.js');
-
-const UserSticker = database.define('UserSticker', {
+const UserSticker = database.define("UserStickers", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   },
-  quantidade: {
+  amount: {
     type: DataTypes.INTEGER,
-    allowNull: true,
-  }
+    allowNull: false,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  stickerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
-Sticker.belongsToMany(User, {
-  through: UserSticker,
-  onUpdate: 'CASCADE',
-  onDelete: 'CASCADE'
-});
+UserSticker.associate = (models) => {
+  UserSticker.belongsTo(models.User, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+    foreignKey: { name: "userId" },
+  });
 
-User.belongsToMany(Sticker, {
-  through: UserSticker,
-  onUpdate: 'CASCADE',
-  onDelete: 'CASCADE'
-});
-
-//Super Many-to-Many
-Sticker.hasMany(UserSticker);
-UserSticker.belongsTo(Sticker);
-User.hasMany(UserSticker);
-UserSticker.belongsTo(User);
-
-UserSticker.sync({alter: true, force: true})
-  .then(() => {
-    console.log('UserSticker table was (re)created');
-  })
-  .catch((err) => console.log(err));
+  UserSticker.belongsTo(models.Sticker, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+    foreignKey: { name: "stickerId" },
+  });
+};
 
 module.exports = UserSticker;

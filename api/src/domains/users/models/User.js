@@ -1,7 +1,7 @@
-const database = require('../../../../database/index.js')
-const {DataTypes} = require('sequelize');
+const database = require("../../../../database/index");
+const { DataTypes } = require("sequelize");
 
-const User = database.define('Users', {
+const User = database.define("Users", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -23,14 +23,12 @@ const User = database.define('Users', {
   },
 });
 
-/*
-Comando para criar/alterar as
-colunas da tabela caso necessário
- */
-User.sync({alter: true, force: true})
-  .then(() => {
-    console.log('User table was (re)created');
-  })
-  .catch((err) => console.log(err));
+User.associate = (models) => {
+  User.belongsToMany(models.Sticker, {
+    through: models.UserSticker,
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  });
+};
 
 module.exports = User;

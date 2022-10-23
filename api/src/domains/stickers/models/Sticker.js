@@ -1,8 +1,7 @@
-const database = require('../../../../database/index.js')
-const {DataTypes} = require('sequelize');
+const database = require("../../../../database/index.js");
+const { DataTypes } = require("sequelize");
 
-
-const Sticker = database.define('Stickers', {
+const Sticker = database.define("Stickers", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -13,24 +12,22 @@ const Sticker = database.define('Stickers', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  nome: {
+  name: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  selecao: {
+  team: {
     type: DataTypes.STRING,
     allowNull: true,
-  }
+  },
 });
 
-/*
-Comando para criar/alterar as
-colunas da tabela caso necessário
- */
-Sticker.sync({alter: true, force: true})
-  .then(() => {
-    console.log('Sticker table was (re)created');
-  })
-  .catch((err) => console.log(err));
+Sticker.associate = (models) => {
+  Sticker.belongsToMany(models.User, {
+    through: models.UserSticker,
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  });
+};
 
 module.exports = Sticker;

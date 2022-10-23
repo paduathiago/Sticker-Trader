@@ -1,105 +1,106 @@
-const UserSticker = require('../models/UserSticker.js');
-const UserService = require('../../users/services/UserService.js');
-const StickerService = require('../../stickers/services/StickerService.js');
-const Sticker = require('../../stickers/models/Sticker.js');
-const User = require('../../users/models/User.js');
+const UserStickerModel = require("../models/UserSticker.js");
+const UserStickerEntity = require("../entities/UserStickerEntity.js");
+const UserService = require("../../users/services/UserService.js");
+const StickerService = require("../../stickers/services/StickerService.js");
+const StickerModel = require("../../stickers/models/Sticker.js");
+const UserModel = require("../../users/models/User.js");
 const { Op } = require("sequelize");
 
-class UserStickerService  {
-  async create(userId, stickerNumber){
+class UserStickerService {
+  async create(userId, stickerNumber) {
     const user = await UserService.getById(userId);
-    const sticker = await StickerService.getByNumber(stickerNumber);
-    const exists = await UserSticker.findOne({where:{ UserId: user.id, StickerId : sticker.id}});
-    if(!exists){
-      await UserSticker.create({UserId: user.id, StickerId: sticker.id, quantidade: 1});
-    }else{
-      console.log(exists);
-      await exists.increment('quantidade');
+    let sticker = await StickerService.getByNumber(stickerNumber);
+
+    if (!sticker) {
+      sticker = await StickerModel.create({ number: stickerNumber });
+    }
+
+    const exists = await UserStickerModel.findOne({
+      where: { userId: user.id, stickerId: sticker.id },
+    });
+    if (!exists) {
+      const newUserSticker = new UserStickerEntity({
+        userId: user.id,
+        stickerId: sticker.id,
+        amount: 1,
+      });
+
+      await UserStickerModel.create(newUserSticker.toObject());
+    } else {
+      await exists.increment("amount");
     }
   }
 
-  async getStickerByUser(userId, stickerNumber){
-    const allStickers = await Sticker.findAll({
+  async getStickerByUser(userId, stickerNumber) {
+    const sticker = await StickerModel.findOne({
       where: {
-        number: stickerNumber,
+        userId: userId,
       },
-    
+
       attributes: {
-        exclude: ['createdAt', 'updatedAt', ],
+        exclude: ["createdAt", "updatedAt"],
       },
       include: {
-        model: User,
+        model: StickerModel,
         where: {
-          id: userId,
+          number: stickerNumber,
         },
-
-        through: {
-          attributes: ['quantidade'],
-        },
-
-      }
+      },
     });
 
-    return allStickers;
+    return sticker;
   }
 
-  async getAllStickersByUser(userId){
-    const allStickers = await Sticker.findAll({
+  async getAllStickersByUser(userId) {
+    const allStickers = await UserStickerModel.findAll({
+      where: {
+        userId,
+      },
       attributes: {
-        exclude: ['createdAt', 'updatedAt'],
+        exclude: ["createdAt", "updatedAt"],
       },
       include: {
-        model: User,
-        where: {
-          id: userId,
-        },
-
-        through: {
-          attributes: [],
-        },
-
-      }
+        model: StickerModel,
+      },
     });
 
     return allStickers;
   }
 
-  async getAllRepetidasByUser(userId){
-    const allStickers = await UserSticker.findAll({
+  async getAllDuplicatesByUser(userId) {
+    const allStickers = await UserStickerModel.findAll({
       where: {
-        'UserId' : userId,
-        'quantidade' : {
-          [Op.gt] : 1,
+        userId,
+        amount: {
+          [Op.gt]: 1,
         },
       },
     });
-    
+
     return allStickers;
   }
 
-  async getAllFaltantesByUser(userId){
-    const allStickers = await Sticker.findAll({
+  async getAllMissingByUser(userId) {
+    const allStickers = await StickerModel.findAll({
       attributes: {
-        exclude: ['createdAt', 'updatedAt'],
+        exclude: ["createdAt", "updatedAt"],
       },
       include: {
         model: User,
         where: {
           id: {
-            [Op.not] : userId,
+            [Op.not]: userId,
           },
         },
 
         through: {
           attributes: [],
         },
-
-      }
+      },
     });
-    
+
     return allStickers;
   }
-
 }
 
-module.exports = new UserStickerService;
+module.exports = new UserStickerService();
