@@ -4,13 +4,12 @@
 # Principais Features
  ### - Login
  ### - Cadastrar figurinhas repetidas e desejadas
- ### - Trocar mensagem com outros usuários
  ### - Ver quais figurinhas que você deseja outro usuário tem repetidas
  
 # Tecnologias
 ### NodeJs
 ### ReactJs
-### MySQL
+### SQLite
 
 # Membros da Equipe
 ### Lourenço Montenegro
@@ -30,7 +29,7 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 
 ### - História 2:
 . Como usuário, gostaria de visualizar figurinhas repetidas de outros usuários
-  - Implementar interface web de busca e apresentação da base de dados de figurinhas
+  - Implementar interface web de busca e apresentação da base de dados de figurinhas [Turi, Pedro]
   - Conferir na base todas as figurinhas repetidas e quantidades [Pedro]
   - Realizar a verificação de elementos em base de dados [Pedro]
   - Verificar figurinhas de outros usuários de acordo com a busca na base de dados [Pedro]
@@ -41,12 +40,11 @@ Discutir acerca do armazenamento de dados [Thiago, Turi, Lourenço, Pedro]
 # Backlog do produto
 ### História:
 . Como usuário, eu gostaria de me cadastrar
-  - Implementar interface web de cadastro e preenchimento de dados
+  - Implementar interface web de cadastro e preenchimento de dados [Lourenço, Pedro
   - Atualizar a base de dados de acordo com os dados do cadastro [Pedro]
 
 ### História:
 . Como administrador, gostaria de banir um usuário
-  - 
 
 ### História:
 . Como usuário, gostaria de manter um chat com outros usuários
