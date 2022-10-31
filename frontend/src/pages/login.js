@@ -55,59 +55,74 @@ export default function Login() {
   } else {
     return (
       <div className="pageFormContainer">
-        <form
-          onSubmit={handleSubmit}
-          className={errorLogin ? "form form--error" : "form"}
-        >
-          <ControlledInput
-            placeholder="Email"
-            label="Email"
-            type="text"
-            state={email}
-            setState={setEmail}
-            error={errorEmail}
-          />
-          <ControlledInput
-            placeholder="Senha"
-            label="Senha"
-            type="password"
-            state={password}
-            setState={setPassword}
-            error={errorPassword}
-          />
-          <div className="form__btnBox form__btnBox--spaceBetween">
-            <Home onClick={() => router.push("/")} className="form__homeBtn" />
-            <CSSTransition
-              in={loadingLogin}
-              timeout={400}
-              classNames="btnPrimary"
-            >
-              <button type="submit" className="btnPrimary">
-                <CSSTransition
-                  in={loadingLogin}
-                  timeout={400}
-                  classNames="btnPrimary__text"
-                >
-                  <p className="btnPrimary__text">Entrar</p>
-                </CSSTransition>
-                <CSSTransition
-                  in={loadingLogin}
-                  timeout={400}
-                  classNames="btnPrimary__loading"
-                  unmountOnExit
-                >
-                  <div className="btnPrimary__loading">
-                    <div className="loadingBox">
-                      <div className="loadingBox__bar loadingBox__bar--1 loadingBox__bar--white"></div>
-                      <div className="loadingBox__bar loadingBox__bar--2 loadingBox__bar--white"></div>
-                      <div className="loadingBox__bar loadingBox__bar--3 loadingBox__bar--white"></div>
-                    </div>
-                  </div>
-                </CSSTransition>
-              </button>
-            </CSSTransition>
+        <div className="pageLettering">
+          <div className="pageLettering__heading">
+            <div className="pageLettering__heading pageLettering__heading--secondary">
+              Entre
+            </div>
+            <div className="pageLettering__heading pageLettering__heading--primary">
+              E se divirta trocando figurinhas e fazendo novos amigos!
+            </div>
           </div>
-        </form>
+        </div>
+        <div className="pageFormContainer__form">
+          <form
+            onSubmit={handleSubmit}
+            className={errorLogin ? "form form--error" : "form"}
+          >
+            <ControlledInput
+              placeholder="Email"
+              label="Email"
+              type="text"
+              state={email}
+              setState={setEmail}
+              error={errorEmail}
+            />
+            <ControlledInput
+              placeholder="Senha"
+              label="Senha"
+              type="password"
+              state={password}
+              setState={setPassword}
+              error={errorPassword}
+            />
+            <div className="form__btnBox form__btnBox--spaceBetween">
+              <Home
+                onClick={() => router.push("/")}
+                className="form__homeBtn"
+              />
+              <CSSTransition
+                in={loadingLogin}
+                timeout={400}
+                classNames="btnPrimary"
+              >
+                <button type="submit" className="btnPrimary">
+                  <CSSTransition
+                    in={loadingLogin}
+                    timeout={400}
+                    classNames="btnPrimary__text"
+                  >
+                    <p className="btnPrimary__text">Entrar</p>
+                  </CSSTransition>
+                  <CSSTransition
+                    in={loadingLogin}
+                    timeout={400}
+                    classNames="btnPrimary__loading"
+                    unmountOnExit
+                  >
+                    <div className="btnPrimary__loading">
+                      <div className="loadingBox">
+                        <div className="loadingBox__bar loadingBox__bar--1 loadingBox__bar--white"></div>
+                        <div className="loadingBox__bar loadingBox__bar--2 loadingBox__bar--white"></div>
+                        <div className="loadingBox__bar loadingBox__bar--3 loadingBox__bar--white"></div>
+                      </div>
+                    </div>
+                  </CSSTransition>
+                </button>
+              </CSSTransition>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

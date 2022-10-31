@@ -80,79 +80,94 @@ export default function Register() {
   } else {
     return (
       <div className="pageFormContainer">
-        <form
-          onSubmit={handleSubmit}
-          className={errorRegister ? "form form--error" : "form"}
-        >
-          <ControlledInput
-            placeholder="Nome"
-            label="Nome"
-            type="text"
-            state={name}
-            formatter={nameFormatter}
-            setState={setName}
-            error={errorName}
-          />
-          <ControlledInput
-            placeholder="Email"
-            label="Email"
-            type="text"
-            state={email}
-            formatter={emailFormatter}
-            setState={setEmail}
-            error={errorEmail}
-          />
-          <ControlledInput
-            placeholder="Senha"
-            label="Senha"
-            type="password"
-            state={password}
-            formatter={passwordFormatter}
-            setState={setPassword}
-            error={errorPassword}
-          />
-          <ControlledInput
-            placeholder="Senha"
-            label="Confirme sua senha"
-            type="password"
-            state={checkPassword}
-            formatter={passwordFormatter}
-            setState={setCheckPassword}
-            error={errorCheckPassword}
-          />
-          <div className="form__btnBox form__btnBox--spaceBetween">
-            <Home onClick={() => router.push("/")} className="form__homeBtn" />
-            <CSSTransition
-              in={loadingRegister}
-              timeout={400}
-              classNames="btnPrimary"
-            >
-              <button type="submit" className="btnPrimary">
-                <CSSTransition
-                  in={loadingRegister}
-                  timeout={400}
-                  classNames="btnPrimary__text"
-                >
-                  <p className="btnPrimary__text">Cadastrar-se</p>
-                </CSSTransition>
-                <CSSTransition
-                  in={loadingRegister}
-                  timeout={400}
-                  classNames="btnPrimary__loading"
-                  unmountOnExit
-                >
-                  <div className="btnPrimary__loading">
-                    <div className="loadingBox">
-                      <div className="loadingBox__bar loadingBox__bar--1 loadingBox__bar--white"></div>
-                      <div className="loadingBox__bar loadingBox__bar--2 loadingBox__bar--white"></div>
-                      <div className="loadingBox__bar loadingBox__bar--3 loadingBox__bar--white"></div>
-                    </div>
-                  </div>
-                </CSSTransition>
-              </button>
-            </CSSTransition>
+        <div className="pageLettering">
+          <div className="pageLettering__heading">
+            <div className="pageLettering__heading pageLettering__heading--secondary">
+              Cadastre-se
+            </div>
+            <div className="pageLettering__heading pageLettering__heading--primary">
+              E se divirta trocando figurinhas e fazendo novos amigos!
+            </div>
           </div>
-        </form>
+        </div>
+        <div className="pageFormContainer__form">
+          <form
+            onSubmit={handleSubmit}
+            className={errorRegister ? "form form--error" : "form"}
+          >
+            <ControlledInput
+              placeholder="Nome"
+              label="Nome"
+              type="text"
+              state={name}
+              formatter={nameFormatter}
+              setState={setName}
+              error={errorName}
+            />
+            <ControlledInput
+              placeholder="Email"
+              label="Email"
+              type="text"
+              state={email}
+              formatter={emailFormatter}
+              setState={setEmail}
+              error={errorEmail}
+            />
+            <ControlledInput
+              placeholder="Senha"
+              label="Senha"
+              type="password"
+              state={password}
+              formatter={passwordFormatter}
+              setState={setPassword}
+              error={errorPassword}
+            />
+            <ControlledInput
+              placeholder="Senha"
+              label="Confirme sua senha"
+              type="password"
+              state={checkPassword}
+              formatter={passwordFormatter}
+              setState={setCheckPassword}
+              error={errorCheckPassword}
+            />
+            <div className="form__btnBox form__btnBox--spaceBetween">
+              <Home
+                onClick={() => router.push("/")}
+                className="form__homeBtn"
+              />
+              <CSSTransition
+                in={loadingRegister}
+                timeout={400}
+                classNames="btnPrimary"
+              >
+                <button type="submit" className="btnPrimary">
+                  <CSSTransition
+                    in={loadingRegister}
+                    timeout={400}
+                    classNames="btnPrimary__text"
+                  >
+                    <p className="btnPrimary__text">Cadastrar-se</p>
+                  </CSSTransition>
+                  <CSSTransition
+                    in={loadingRegister}
+                    timeout={400}
+                    classNames="btnPrimary__loading"
+                    unmountOnExit
+                  >
+                    <div className="btnPrimary__loading">
+                      <div className="loadingBox">
+                        <div className="loadingBox__bar loadingBox__bar--1 loadingBox__bar--white"></div>
+                        <div className="loadingBox__bar loadingBox__bar--2 loadingBox__bar--white"></div>
+                        <div className="loadingBox__bar loadingBox__bar--3 loadingBox__bar--white"></div>
+                      </div>
+                    </div>
+                  </CSSTransition>
+                </button>
+              </CSSTransition>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

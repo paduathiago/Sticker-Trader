@@ -8,23 +8,19 @@
     display: grid;
     width: 100%;
     max-width: 144rem;
-    row-gap: 2rem;
     column-gap: 6rem;
-    padding-top: 2rem;
     min-height: 100vh;
     align-content: stretch;
 
     @include respond(tabPort) {
-      row-gap: 2rem;
       column-gap: 4rem;
     }
 
     @include respond(phone) {
-      row-gap: 1rem;
       column-gap: 1rem;
     }
 
-    grid-template-rows: [navbarBoxStart] min-content [navbarBoxEnd contentBoxStart] 1fr [contentBoxEnd];
+    grid-template-rows: [navbarBoxStart] 8rem [navbarBoxEnd contentBoxStart] 1fr [contentBoxEnd];
 
     &--default {
       grid-template-columns:
