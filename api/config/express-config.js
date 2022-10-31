@@ -1,38 +1,38 @@
-require('dotenv').config();
-
-const express = require('express');
+const express = require("express");
 const app = express();
 
-const cors = require('cors');
-app.use(cors(
-    {
-        origin: process.env.CLIENT_URL,
-        credentials: true,
-    },
-));
+const cors = require("cors");
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-app.use(express.urlencoded({
+app.use(
+  express.urlencoded({
     extended: true,
-}));
+  })
+);
 
 app.use(express.json());
 
-const usersRouter = require('../src/domains/users/controllers/index.js');
-app.use('/api/users', usersRouter);
+const usersRouter = require("../src/domains/users/controllers/index.js");
+app.use("/api/users", usersRouter);
 
-const artistsRouter = require('../src/domains/artists/controllers/index.js');
-app.use('/api/artists', artistsRouter);
+const stickersRouter = require("../src/domains/stickers/controllers/index.js");
+app.use("/api/stickers", stickersRouter);
 
-const songsRouter = require('../src/domains/songs/controllers/index.js');
-app.use('/api/songs', songsRouter);
+const usersStickersRouter = require("../src/domains/userStickers/controllers/index.js");
+app.use("/api/userStickers", usersStickersRouter);
 
-const usersSongsRouter = require('../src/domains/userSongs/controllers/index.js');
-app.use('/api/users-songs', usersSongsRouter);
+const notificationsRouter = require("../src/domains/notifications/controllers/index.js");
+app.use("/api/notifications", notificationsRouter);
 
-const errorHandler = require('../src/middlewares/error-handler.js');
+const errorHandler = require("../src/middlewares/error-handler.js");
 app.use(errorHandler);
 
 module.exports = app;
