@@ -10,7 +10,7 @@
 # Tecnologias
 ### NodeJs
 ### ReactJs
-### SQLite
+### MySQL
 
 # Membros da Equipe
 ### Lourenço Montenegro
