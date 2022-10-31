@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const UserService = require("../services/UserService");
+const UserService = require("../services/");
 const {
   loginMiddleware,
   verifyJWT,
@@ -42,7 +42,7 @@ router.post("/", async (req, res, next) => {
 //Get All Users
 router.get("/", verifyJWT, async (req, res, next) => {
   try {
-    const users = await UserService.getAll();
+    const users = await UserService.getAll(req.user.id);
     res.status(statusCodes.success).json(users);
   } catch (error) {
     next(error);

@@ -1,8 +1,10 @@
 const User = require("../src/domains/users/models/User");
 const Sticker = require("../src/domains/stickers/models/Sticker");
 const UserSticker = require("../src/domains/userStickers/models/UserSticker");
+const Notification = require("../src/domains/notifications/models/Notification");
+const Exchange = require("../src/domains/exchange/models/Exchange");
 
-models = { User, Sticker, UserSticker };
+models = { User, Sticker, UserSticker, Notification, Exchange };
 
 for (modelName in models) {
   models[modelName]

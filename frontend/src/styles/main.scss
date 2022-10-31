@@ -12,8 +12,12 @@
 @import "./components/loading";
 @import "./components/optionsPopup";
 @import "./components/sticker";
+@import "./components/userCard";
+@import "./components/stickerSelect";
 
 @import "./layout/container";
 
 @import "./pages/home";
 @import "./pages/collection";
+@import "./pages/exchange";
+@import "./pages/exchangeUser";

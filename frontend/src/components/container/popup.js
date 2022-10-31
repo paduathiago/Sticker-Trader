@@ -22,7 +22,7 @@ export default function DashboardPopup({ popupIn, setPopupIn }) {
           </Link>
         </div>
         <div className="optionsPopup__optionBox">
-          <Link href="/trade">
+          <Link href="/exchange">
             <a
               onClick={() => setPopupIn(false)}
               className="textBtn textBtn--mobileActive textBtn--stretch"

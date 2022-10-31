@@ -8,13 +8,17 @@ import { UserContext } from "../components/context/context";
 export default function Collection({ data, error }) {
   const { user } = useContext(UserContext);
 
-  const [stickers, setStickers] = useState(data || []);
+  const [stickers, setStickers] = useState((data && data.stickers) || []);
   const [errorFetchStickers, setErrorFetchStickers] = useState(
     data ? null : error
   );
 
   const [stickerNumber, setStickerNumber] = useState("");
   const [errorAddSticker, setErrorAddSticker] = useState(false);
+
+  const [errorDeleteSticker, setErrorDeleteSticker] = useState(
+    new Array(stickers.length)
+  );
 
   const router = useRouter();
 
@@ -26,17 +30,70 @@ export default function Collection({ data, error }) {
         });
 
         setErrorAddSticker(false);
-        setStickers((prevState) => [...prevState, stickerNumber]);
+
+        setStickers((prevState) => {
+          const newState = [];
+          let added = false;
+
+          prevState.forEach((entry) => {
+            if (entry <= stickerNumber) {
+              newState.push(entry);
+            } else {
+              if (!added) {
+                newState.push(stickerNumber);
+                added = true;
+              }
+
+              newState.push(entry);
+            }
+          });
+
+          if (!added) {
+            newState.push(stickerNumber);
+            added = true;
+          }
+
+          return newState;
+        });
+
         setStickerNumber("");
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data);
         setErrorAddSticker(true);
       }
     }
   }
 
+  async function deleteSticker(stickerIndex, stickerNumber) {
+    try {
+      await api.delete(`/api/userStickers/${stickerNumber}`, {
+        withCredentials: true,
+      });
+
+      setStickers((prevState) => {
+        const newStickers = [];
+        let removed = false;
+
+        prevState.forEach((entry) => {
+          if (entry == stickerNumber && !removed) {
+            removed = true;
+          } else {
+            newStickers.push(entry);
+          }
+        });
+
+        return newStickers;
+      });
+    } catch (err) {
+      console.log(err.response.data);
+      setErrorDeleteSticker((prevState) =>
+        prevState.map((entry, index) => (index == stickerIndex ? true : entry))
+      );
+    }
+  }
+
   if (!user) {
-    router.push("/");
+    router.push("/login");
     return null;
   } else {
     return (
@@ -59,10 +116,13 @@ export default function Collection({ data, error }) {
             </a>
           </div>
           <div className="collection__contentBox">
-            {stickers &&
-              stickers.map((sticker, index) => (
-                <Sticker key={index} number={sticker} />
-              ))}
+            {stickers.map((sticker, index) => (
+              <Sticker
+                deleteFunction={() => deleteSticker(index, sticker)}
+                key={index}
+                number={sticker}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -89,15 +149,9 @@ export async function getServerSideProps({ req }) {
         });
       }
 
-      stickers.sort((a, b) => {
-        if (a < b) return -1;
-        else if (b > a) return 1;
-        else return 0;
-      });
-
       return {
         props: {
-          data: stickers,
+          data: { stickers },
         },
       };
     })

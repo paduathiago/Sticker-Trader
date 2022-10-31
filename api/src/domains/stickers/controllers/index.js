@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const StickerService = require("../services/StickerService");
+const StickerService = require("../services");
 const {
   verifyJWT,
   checkRole,
@@ -10,16 +10,6 @@ const statusCodes = require("../../../../constants/statusCodes.js");
 router.post("/:id", verifyJWT, async (req, res, next) => {
   try {
     await StickerService.create(req.body, req.params.number);
-    res.status(statusCodes.created).end();
-  } catch (error) {
-    next(error);
-  }
-});
-
-//Cria figurinhas de número 1 a 200
-router.post("/all/:n", verifyJWT, async (req, res, next) => {
-  try {
-    await StickerService.createAll();
     res.status(statusCodes.created).end();
   } catch (error) {
     next(error);

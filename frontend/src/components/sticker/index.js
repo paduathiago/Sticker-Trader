@@ -1,10 +1,8 @@
-import React from "react";
 import { Times } from "../../icons";
-
-export default function Sticker({ number }) {
+export default function Sticker({ number, deleteFunction, ...rest }) {
   return (
-    <div className="sticker">
-      <div className="sticker__removeBox">
+    <div {...rest} className="sticker">
+      <div onClick={deleteFunction} className="sticker__removeBox">
         <Times />
       </div>
       <div className="sticker__number">{number}</div>

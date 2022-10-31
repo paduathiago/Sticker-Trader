@@ -4,7 +4,7 @@
 class InvalidParamError extends Error {
   constructor(msg) {
     super(msg);
-    this.name = 'InvalidParamError';
+    this.name = "InvalidParamError";
   }
 }
 

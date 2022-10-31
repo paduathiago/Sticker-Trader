@@ -8,7 +8,6 @@
   &__grid {
     width: 60rem;
     max-width: 100%;
-    height: 10rem;
     display: grid;
     row-gap: 2rem;
     grid-template-columns: [headerBoxStart contentBoxStart] 1fr [headerBoxEnd addBoxStart] 1fr [addBoxEnd contentBoxEnd];

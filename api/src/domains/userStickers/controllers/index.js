@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const UserStickerService = require("../services/UserStickerService.js");
+const UserStickerService = require("../services/");
 const { verifyJWT } = require("../../../middlewares/auth-middlewares");
 const statusCodes = require("../../../../constants/statusCodes.js");
 
@@ -58,12 +58,24 @@ router.get("/missing", verifyJWT, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", verifyJWT, async (req, res, next) => {
+router.delete("/:number", verifyJWT, async (req, res, next) => {
   try {
-    await StickerService.delete(req.params.id);
+    await UserStickerService.deleteByNumber(req.user.id, req.params.number);
     res.status(statusCodes.noContent).end();
   } catch (err) {
     next(err);
+  }
+});
+
+router.get("/exchange/:user2Id", verifyJWT, async (req, res, next) => {
+  try {
+    const exchangePair = await UserStickerService.getExchangePair(
+      req.user.id,
+      req.params.user2Id
+    );
+    res.status(statusCodes.success).json(exchangePair);
+  } catch (error) {
+    next(error);
   }
 });
 

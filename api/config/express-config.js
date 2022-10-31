@@ -29,6 +29,9 @@ app.use("/api/stickers", stickersRouter);
 const usersStickersRouter = require("../src/domains/userStickers/controllers/index.js");
 app.use("/api/userStickers", usersStickersRouter);
 
+const notificationsRouter = require("../src/domains/notifications/controllers/index.js");
+app.use("/api/notifications", notificationsRouter);
+
 const errorHandler = require("../src/middlewares/error-handler.js");
 app.use(errorHandler);
 
